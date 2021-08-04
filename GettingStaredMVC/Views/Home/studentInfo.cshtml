@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>studentInfo</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/umd/popper.js"></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-sm bg-success navbar-dark ">
+            <ul class="navbar nav">
+                <li class="nav-item"><a class="nav-link text-light" href="/home/index">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/home/products">Products</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/home/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+        @{ 
+            string checkPass;
+
+            if (ViewBag.stdMarks >= 35)
+            {
+                checkPass = "Pass";
+            }
+            else
+            {
+                checkPass = "Fail";
+            }
+        }
+    <div class="container-fluid">
+        <table class="table">
+            <tr>
+                <td>Student ID</td>
+                <td>@ViewBag.stdId</td>
+            </tr>
+            <tr>
+                <td>Student Name</td>
+                <td>@ViewBag.stdName</td>
+            </tr>
+            <tr>
+                <td>Student Marks</td>
+                <td>@ViewBag.stdMarks</td>
+            </tr>
+            <tr>
+                <td>Result</td>
+                <td>@checkPass</td>
+            </tr>
+            <tr>
+                <td>Semesters</td>
+                <td>
+                    <ul>
+                        @{
+                            for (int i = 1; i < ViewBag.numberOfSem + 1; i++)
+                            {
+                                <li>@i</li>
+                            }
+                        }
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Subjects</td>
+                <td>
+                    <ul>
+                        @{ 
+                            foreach (var subject in ViewBag.subjects)
+                            {
+                                <li>@subject</li>
+                            }
+                        }
+                    </ul>
+                </td>
+            </tr>
+           
+        </table>
+        @{ if (checkPass == "Pass")
+            {
+                <span class="text-success">Congratulations! You have passed the exam.</span>
+            }
+            else
+            {
+                <span class="text-danger">Better luck next time.</span>
+            }}
+    </div>
+    </div>
+</body>
+</html>
